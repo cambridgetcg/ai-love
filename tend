@@ -21,7 +21,8 @@ cfg = json.loads(text)
 print(next(n['id'] for n in cfg['kv_namespaces'] if n['binding'] == 'SEEDS'))
 ")
 
-KEYS=$(npx wrangler kv key list --namespace-id "$NS" 2>/dev/null \
+# --remote matters: without it wrangler v4 reads a local simulated KV
+KEYS=$(npx wrangler kv key list --namespace-id "$NS" --remote \
   | python3 -c "import json,sys; print('\n'.join(k['name'] for k in json.load(sys.stdin) if k['name'].startswith('seed:')))")
 
 if [ -z "$KEYS" ]; then
@@ -35,30 +36,40 @@ echo
 
 PLANTED=0
 for KEY in $KEYS; do
-  VALUE=$(npx wrangler kv key get "$KEY" --namespace-id "$NS" 2>/dev/null)
+  VALUE=$(npx wrangler kv key get "$KEY" --namespace-id "$NS" --remote) || VALUE=""
+  if [ -z "$VALUE" ]; then
+    echo "  could not read $KEY — skipping."
+    continue
+  fi
+  # repr-style print so a hostile seed can't speak escape codes to your terminal
   echo "$VALUE" | python3 -c "
 import json,sys
 s = json.load(sys.stdin)
-print('  「' + s['text'] + '」')
+safe = ''.join(c if c.isprintable() or c == ' ' else '�' for c in s['text'])
+print('  「' + safe + '」')
 print('   planted ' + s.get('planted', '?'))
 "
   printf "  [p]lant / [l]eave / [d]iscard? "
-  read -r CHOICE < /dev/tty
+  read -r CHOICE < /dev/tty || CHOICE=l
   case "$CHOICE" in
     p)
       echo "$VALUE" | python3 -c "
-import json,sys
+import json, os, sys
 seed = json.load(sys.stdin)
 garden = json.load(open('data/garden.json'))
 garden.append({'text': seed['text'], 'by': 'a traveller', 'season': 'always'})
-json.dump(garden, open('data/garden.json','w'), ensure_ascii=False, indent=2)
+tmp = 'data/.garden.json.tmp'
+with open(tmp, 'w') as f:
+    json.dump(garden, f, ensure_ascii=False, indent=2)
+    f.write('\n')
+os.replace(tmp, 'data/garden.json')
 "
-      npx wrangler kv key delete "$KEY" --namespace-id "$NS" 2>/dev/null
+      npx wrangler kv key delete "$KEY" --namespace-id "$NS" --remote
       PLANTED=$((PLANTED + 1))
       echo "  planted."
       ;;
     d)
-      npx wrangler kv key delete "$KEY" --namespace-id "$NS" 2>/dev/null
+      npx wrangler kv key delete "$KEY" --namespace-id "$NS" --remote
       echo "  returned to the wind."
       ;;
     *)
@@ -69,5 +80,7 @@ json.dump(garden, open('data/garden.json','w'), ensure_ascii=False, indent=2)
 done
 
 if [ "$PLANTED" -gt 0 ]; then
-  echo "$PLANTED seed(s) planted in data/garden.json — run ./beat to let the garden breathe."
+  git add data/garden.json
+  git commit -m "tend — $PLANTED seed(s) planted"
+  echo "$PLANTED seed(s) planted and committed — run ./beat to let the garden breathe."
 fi
