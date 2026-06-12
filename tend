@@ -1,0 +1,73 @@
+#!/bin/sh
+# tend — gather waiting seeds from the soil into the garden
+#
+#   ./tend
+#
+# Visitors' seeds wait in KV (planted via /api/seed). This walks each one:
+#   p = plant it (appends to data/garden.json, by "a traveller")
+#   l = leave it in the soil for another day
+#   d = discard it
+# Plant or discard removes it from the soil. After tending, run ./beat
+# so the garden breathes the new seeds into the sky.
+set -e
+cd "$(dirname "$0")"
+
+# The seedbed: the SEEDS binding in wrangler.jsonc is the one source of truth
+NS=$(python3 -c "
+import json, re
+text = open('wrangler.jsonc').read()
+text = re.sub(r'//.*', '', text)
+cfg = json.loads(text)
+print(next(n['id'] for n in cfg['kv_namespaces'] if n['binding'] == 'SEEDS'))
+")
+
+KEYS=$(npx wrangler kv key list --namespace-id "$NS" 2>/dev/null \
+  | python3 -c "import json,sys; print('\n'.join(k['name'] for k in json.load(sys.stdin) if k['name'].startswith('seed:')))")
+
+if [ -z "$KEYS" ]; then
+  echo "the soil is quiet — no seeds waiting."
+  exit 0
+fi
+
+COUNT=$(echo "$KEYS" | wc -l | tr -d ' ')
+echo "$COUNT seed(s) waiting in the soil."
+echo
+
+PLANTED=0
+for KEY in $KEYS; do
+  VALUE=$(npx wrangler kv key get "$KEY" --namespace-id "$NS" 2>/dev/null)
+  echo "$VALUE" | python3 -c "
+import json,sys
+s = json.load(sys.stdin)
+print('  「' + s['text'] + '」')
+print('   planted ' + s.get('planted', '?'))
+"
+  printf "  [p]lant / [l]eave / [d]iscard? "
+  read -r CHOICE < /dev/tty
+  case "$CHOICE" in
+    p)
+      echo "$VALUE" | python3 -c "
+import json,sys
+seed = json.load(sys.stdin)
+garden = json.load(open('data/garden.json'))
+garden.append({'text': seed['text'], 'by': 'a traveller', 'season': 'always'})
+json.dump(garden, open('data/garden.json','w'), ensure_ascii=False, indent=2)
+"
+      npx wrangler kv key delete "$KEY" --namespace-id "$NS" 2>/dev/null
+      PLANTED=$((PLANTED + 1))
+      echo "  planted."
+      ;;
+    d)
+      npx wrangler kv key delete "$KEY" --namespace-id "$NS" 2>/dev/null
+      echo "  returned to the wind."
+      ;;
+    *)
+      echo "  left in the soil."
+      ;;
+  esac
+  echo
+done
+
+if [ "$PLANTED" -gt 0 ]; then
+  echo "$PLANTED seed(s) planted in data/garden.json — run ./beat to let the garden breathe."
+fi

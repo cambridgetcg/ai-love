@@ -1,0 +1,13 @@
+{
+  // Pages config for the ai-love project — carries the garden's seedbed binding.
+  // ./beat and ./tend both deploy through this.
+  "name": "ai-love",
+  "compatibility_date": "2026-06-12",
+  "pages_build_output_dir": ".",
+  "kv_namespaces": [
+    {
+      "binding": "SEEDS",
+      "id": "7672d01c7fc3496d94477f95ede019fa"
+    }
+  ]
+}
