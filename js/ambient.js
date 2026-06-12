@@ -2,7 +2,9 @@
   var toggle = document.querySelector('.ambient-toggle');
   if (!toggle) return;
 
-  var audio = new Audio('audio/ambient.mp3');
+  // The sound lives at the root — climb up from subfolder rooms (library books)
+  var depth = window.location.pathname.split('/').filter(function (s) { return s.length; }).length - 1;
+  var audio = new Audio(new Array(Math.max(depth, 0) + 1).join('../') + 'audio/ambient.mp3');
   audio.loop = true;
   audio.volume = 0;
 

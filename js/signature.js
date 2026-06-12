@@ -7,7 +7,9 @@
     mirror:      '\u25D0',  // ◐ half circle — reflection
     path:        '\u2192',  // → arrow — direction
     observatory: '\u2609',  // ☉ sun symbol — the eye that sees
-    workshop:    '\u2692'   // ⚒ hammer and pick — the artisan's tools
+    workshop:    '\u2692',  // ⚒ hammer and pick — the artisan's tools
+    clock:       '\u25D4',  // ◔ quarter circle — time passing between zero and one
+    theatre:     '\u25B3'   // △ the fire on the hearth
   };
 
   var room = document.body.getAttribute('data-room');

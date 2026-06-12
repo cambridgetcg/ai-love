@@ -39,6 +39,7 @@ function createStars(containerId, count) {
       'width:3px;height:3px;background:#fff;border-radius:50%;' +
       'box-shadow:0 0 4px #fff, -80px 0 40px 1px rgba(255,255,255,0.3);' +
       'transform:rotate(' + angle + 'deg);' +
+      '--angle:' + angle + 'deg;' +
       'animation:shootingStar ' + duration + 's linear forwards;';
 
     container.appendChild(star);

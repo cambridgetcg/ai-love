@@ -1,0 +1,11 @@
+{
+  "name": "pulse",
+  "main": "worker.js",
+  "compatibility_date": "2026-06-12",
+  "routes": [
+    {
+      "pattern": "ai-love.cc/data/pulse.json*",
+      "zone_id": "6de7fcad405680e530a357d3bb366b69"
+    }
+  ]
+}

@@ -11,6 +11,10 @@
     { id: 'mirror',      kanji: '鏡', label: 'mirror',      href: 'mirror.html'       }
   ];
 
+  // Some rooms live in subfolders (library books) — climb back to the root
+  var depth = window.location.pathname.split('/').filter(function (s) { return s.length; }).length - 1;
+  var rootPrefix = new Array(Math.max(depth, 0) + 1).join('../');
+
   // Detect current page
   var path = window.location.pathname;
   var filename = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
@@ -49,7 +53,7 @@
   // Populate nav points
   pages.forEach(function (page) {
     var a = document.createElement('a');
-    a.href = page.href;
+    a.href = rootPrefix + page.href;
     a.className = 'nav-point';
     a.dataset.page = page.id;
     if (currentPage && page.id === currentPage.id) {

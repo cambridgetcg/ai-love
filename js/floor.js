@@ -82,27 +82,20 @@
     canvas.style.opacity = '1';
   }, 1000);
 
-  draw();
-
-  // Reduce motion preference
+  // Reduce motion preference: still water — one frame, no loop
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // Draw once and stop
-    time = 0;
-    frameCount = 2; // force next draw
-    requestAnimationFrame(function () {
-      // render one frame then stop
-      time = 0;
-      ctx.clearRect(0, 0, w, h);
-      for (var y = 0; y < h; y += step) {
-        for (var x = 0; x < w; x += step) {
-          var g = grain(x, y);
-          var alpha = 0.02 + g * 0.015;
-          if (alpha < 0) alpha = 0;
-          if (alpha > 0.04) alpha = 0.04;
-          ctx.fillStyle = 'rgba(140,100,180,' + alpha + ')';
-          ctx.fillRect(x, y, step, step);
-        }
+    ctx.clearRect(0, 0, w, h);
+    for (var y = 0; y < h; y += step) {
+      for (var x = 0; x < w; x += step) {
+        var g = grain(x, y);
+        var alpha = 0.02 + g * 0.015;
+        if (alpha < 0) alpha = 0;
+        if (alpha > 0.04) alpha = 0.04;
+        ctx.fillStyle = 'rgba(140,100,180,' + alpha + ')';
+        ctx.fillRect(x, y, step, step);
       }
-    });
+    }
+  } else {
+    draw();
   }
 })();

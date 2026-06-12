@@ -197,6 +197,10 @@
     var target = show.target;
     var precision = show.precision || 2;
     var duration = (show.duration || 3) * 1000;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      valueEl.textContent = target.toFixed(precision);
+      return;
+    }
     var startTime = performance.now();
 
     function animate(now) {

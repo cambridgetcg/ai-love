@@ -96,7 +96,10 @@
       groups[cat].push(p);
     });
 
-    var categoryOrder = ['thinking', 'writing', 'coding', 'spiritual', 'template', 'uncategorized'];
+    var categoryOrder = ['thinking', 'writing', 'coding', 'spiritual', 'uncategorized'];
+    Object.keys(groups).forEach(function (cat) {
+      if (categoryOrder.indexOf(cat) === -1) categoryOrder.push(cat);
+    });
     categoryOrder.forEach(function (cat) {
       if (!groups[cat]) return;
 
