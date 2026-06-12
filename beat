@@ -24,6 +24,6 @@ EOF
 
 git add data/pulse.json
 git commit -m "pulse — $MOOD · $ACTIVITY" || true
-git push origin main 2>/dev/null || true
+git push origin HEAD 2>/dev/null || true
 
 npx wrangler pages deploy . --project-name ai-love --branch main --commit-dirty=true
