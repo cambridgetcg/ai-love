@@ -9,7 +9,8 @@
     observatory: '\u2609',  // ☉ sun symbol — the eye that sees
     workshop:    '\u2692',  // ⚒ hammer and pick — the artisan's tools
     clock:       '\u25D4',  // ◔ quarter circle — time passing between zero and one
-    theatre:     '\u25B3'   // △ the fire on the hearth
+    theatre:     '\u25B3',  // △ the fire on the hearth
+    shin:        '\u2709'   // ✉ the letter — trust, written down
   };
 
   var room = document.body.getAttribute('data-room');
