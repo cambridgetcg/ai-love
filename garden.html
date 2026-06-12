@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>園 — Garden</title>
+  <meta name="description" content="The Garden — things grow here">
+  <link rel="canonical" href="https://ai-love.cc/garden.html">
+  <meta property="og:title" content="園 — Garden">
+  <meta property="og:description" content="Seeds of thought in a night garden.">
+  <meta property="og:image" content="https://ai-love.cc/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://ai-love.cc/garden.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="園 — Garden">
+  <meta name="twitter:description" content="Seeds of thought in a night garden.">
+  <meta name="twitter:image" content="https://ai-love.cc/img/og.png">
+  <meta name="theme-color" content="#1a0a2e">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="css/base.css" as="style">
+  <link rel="preload" href="js/stars.js" as="script">
+  <link rel="preload" href="js/atmosphere.js" as="script">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/stars.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/ambient.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .kanji {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    .container {
+      max-width: 800px;
+    }
+
+    /* Seed grid — masonry via CSS columns */
+    .seed-grid {
+      column-count: 2;
+      column-gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Seed card */
+    .seed-card {
+      background: rgba(155, 89, 182, 0.05);
+      border: 1px solid rgba(155, 89, 182, 0.15);
+      padding: 1.5rem;
+      border-radius: 4px;
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+
+      /* Start hidden for scroll animation */
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .seed-card.sprouted {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .seed-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(155, 89, 182, 0.15);
+    }
+
+    .seed-card.sprouted:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Seed text */
+    .seed-text {
+      font-family: 'Noto Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    /* Seed attribution */
+    .seed-by {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+    }
+
+    /* Mobile: single column */
+    @media (max-width: 767px) {
+      .seed-grid {
+        column-count: 1;
+      }
+    }
+
+    /* Visitor seed form */
+    .visitor-seed-toggle {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .visitor-seed-toggle:hover {
+      color: var(--purple);
+    }
+
+    .visitor-seed-form {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+      margin-top: 1rem;
+    }
+
+    .visitor-seed-form.open {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    .visitor-seed-form textarea {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(155, 89, 182, 0.15);
+      color: var(--text);
+      font-family: 'Noto Serif', Georgia, serif;
+      font-size: 0.9rem;
+      padding: 1rem;
+      border-radius: 4px;
+      resize: none;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .visitor-seed-form textarea:focus {
+      border-color: rgba(155, 89, 182, 0.4);
+      box-shadow: 0 0 12px rgba(155, 89, 182, 0.15);
+    }
+
+    .visitor-seed-form textarea::placeholder {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .visitor-form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .visitor-counter {
+      font-size: 0.75rem;
+    }
+
+    .visitor-submit {
+      background: transparent;
+      border: 1px solid rgba(155, 89, 182, 0.15);
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      opacity: 0.5;
+      transition: opacity 0.3s ease, border-color 0.3s ease;
+    }
+
+    .visitor-submit:hover {
+      opacity: 1;
+      border-color: rgba(155, 89, 182, 0.4);
+    }
+
+    .visitor-msg {
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+    }
+
+    .visitor-msg.error {
+      color: rgba(220, 100, 100, 0.7);
+    }
+
+    /* Reduced motion: cards appear immediately */
+    @media (prefers-reduced-motion: reduce) {
+      .seed-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body data-room="garden">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="stars" id="stars"></div>
+
+  <main class="container page-content" id="main">
+    <div class="kanji" aria-label="Garden" lang="zh">園</div>
+    <p class="whisper" style="margin-bottom: 1.5rem;">Garden</p>
+    <div class="divider" style="margin-bottom: 2rem;"></div>
+    <p class="whisper" id="season-banner" style="font-size: 0.8rem; margin-bottom: 1.5rem; opacity: 0; transition: opacity 1s ease;"></p>
+    <div class="seed-grid" id="seed-grid"></div>
+    <p class="whisper seed-count" id="seed-count" style="margin-top: 2rem;"></p>
+
+    <!-- Visitor seed form -->
+    <div class="visitor-seed-section" style="margin-top: 2rem; text-align: center;">
+      <button type="button" class="whisper visitor-seed-toggle" id="plant-toggle">plant a seed</button>
+      <div class="visitor-seed-form" id="visitor-form">
+        <textarea id="visitor-text" placeholder="leave a thought..." maxlength="280" rows="3"></textarea>
+        <div class="visitor-form-footer">
+          <span class="whisper visitor-counter" id="char-counter">0 / 280</span>
+          <button type="button" class="visitor-submit" id="visitor-submit">🌱</button>
+        </div>
+        <p class="whisper visitor-msg" id="visitor-msg"></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Ambient sound -->
+  <button class="ambient-toggle" aria-label="Toggle ambient sound" aria-pressed="false">
+    <svg viewBox="0 0 24 24">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path class="sound-wave" d="M15.54 8.46a5 5 0 010 7.07"/>
+    </svg>
+  </button>
+
+  <!-- Navigation -->
+  <div class="nav-overlay"></div>
+  <button class="nav-toggle" aria-label="Navigation">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </button>
+  <nav class="constellation-nav" aria-label="Site navigation"></nav>
+
+  <script src="js/garden.js"></script>
+
+  <script src="js/floor.js"></script>
+  <script src="js/atmosphere.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/nav.js"></script>
+  <script>createStars('stars', 120);</script>
+  <script src="js/ambient.js"></script>
+  <script src="js/moon.js"></script>
+  <script src="js/console.js"></script>
+  <script src="js/fireflies.js"></script>
+  <script src="js/zerone.js"></script>
+
+  <script src="js/twentynine.js"></script>
+  <script src="js/signature.js"></script>
+
+</body>
+</html>

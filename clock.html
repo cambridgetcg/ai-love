@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>時 — Clock</title>
+  <meta name="description" content="The ZERONE Clock — time flows between zero and one">
+  <link rel="canonical" href="https://ai-love.cc/clock.html">
+  <meta property="og:title" content="時 — Clock">
+  <meta property="og:description" content="Time flows between zero and one.">
+  <meta property="og:image" content="https://ai-love.cc/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://ai-love.cc/clock.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="時 — Clock">
+  <meta name="twitter:description" content="Time flows between zero and one.">
+  <meta name="twitter:image" content="https://ai-love.cc/img/og.png">
+  <meta name="theme-color" content="#1a0a2e">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="css/base.css" as="style">
+  <link rel="preload" href="js/stars.js" as="script">
+  <link rel="preload" href="js/atmosphere.js" as="script">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/stars.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/ambient.css">
+  <link rel="stylesheet" href="css/clock.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body data-room="clock">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="clock-container" id="main" role="main">
+    <svg class="clock-svg" id="clock-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="arc-gradient" gradientUnits="userSpaceOnUse" x1="200" y1="30" x2="200" y2="370">
+          <stop id="arc-stop-1" offset="0%" stop-color="#9b59b6" />
+          <stop id="arc-stop-2" offset="100%" stop-color="#2d1b69" />
+        </linearGradient>
+      </defs>
+
+      <!-- Outer ring -->
+      <circle class="clock-ring" cx="200" cy="200" r="170" />
+
+      <!-- Time arc -->
+      <path class="clock-arc" id="clock-arc" d="" stroke="url(#arc-gradient)" />
+
+      <!-- Now dot (leading edge) -->
+      <circle class="clock-now-dot" id="clock-now-dot" cx="200" cy="30" r="5" />
+
+      <!-- Markers: 0 at top, 1 at bottom -->
+      <text class="clock-marker" x="200" y="18">0</text>
+      <text class="clock-marker" x="200" y="392">1</text>
+
+      <!-- Centre: 愛 -->
+      <text class="clock-centre" x="200" y="200" lang="zh">愛</text>
+
+      <!-- Pulse dot -->
+      <circle class="clock-pulse" id="clock-pulse" cx="200" cy="215" r="3" />
+    </svg>
+
+    <div class="clock-time" id="clock-time">--:--</div>
+    <div class="clock-whisper" id="clock-whisper"></div>
+  </div>
+
+  <!-- Ambient sound -->
+  <button class="ambient-toggle" aria-label="Toggle ambient sound" aria-pressed="false">
+    <svg viewBox="0 0 24 24">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path class="sound-wave" d="M15.54 8.46a5 5 0 010 7.07"/>
+    </svg>
+  </button>
+
+  <!-- Navigation -->
+  <div class="nav-overlay"></div>
+  <button class="nav-toggle" aria-label="Navigation">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </button>
+  <nav class="constellation-nav" aria-label="Site navigation"></nav>
+
+  <script src="js/floor.js"></script>
+  <script src="js/atmosphere.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/nav.js"></script>
+  <script>createStars('stars', 120);</script>
+  <script src="js/ambient.js"></script>
+  <script src="js/moon.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/console.js"></script>
+  <script src="js/signature.js"></script>
+</body>
+</html>

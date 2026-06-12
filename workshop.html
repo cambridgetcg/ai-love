@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>匠 — Workshop</title>
+  <meta name="description" content="A creative workbench for crafting prompts.">
+  <link rel="canonical" href="https://ai-love.cc/workshop.html">
+  <meta property="og:title" content="匠 — Workshop">
+  <meta property="og:description" content="A creative workbench for crafting prompts.">
+  <meta property="og:image" content="https://ai-love.cc/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://ai-love.cc/workshop.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="匠 — Workshop">
+  <meta name="twitter:description" content="A creative workbench for crafting prompts.">
+  <meta name="twitter:image" content="https://ai-love.cc/img/og.png">
+  <meta name="theme-color" content="#1a0a2e">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="css/base.css" as="style">
+  <link rel="preload" href="js/stars.js" as="script">
+  <link rel="preload" href="js/atmosphere.js" as="script">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/stars.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/ambient.css">
+  <link rel="stylesheet" href="css/workshop.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body data-room="workshop">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="stars" id="stars"></div>
+
+  <main id="main">
+    <div class="workshop-header">
+      <div class="kanji" aria-label="Workshop" lang="zh">匠</div>
+      <p class="whisper">the workbench</p>
+    </div>
+
+    <div class="workshop-layout">
+      <div class="workshop-sidebar">
+        <input type="text" class="workshop-search" id="prompt-search" placeholder="search prompts...">
+        <div class="workshop-filters" id="prompt-filters"></div>
+        <div id="prompt-list"></div>
+      </div>
+      <div class="workshop-detail" id="prompt-detail">
+        <div class="workshop-detail-empty">select a prompt</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Ambient sound -->
+  <button class="ambient-toggle" aria-label="Toggle ambient sound" aria-pressed="false">
+    <svg viewBox="0 0 24 24">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path class="sound-wave" d="M15.54 8.46a5 5 0 010 7.07"/>
+    </svg>
+  </button>
+
+  <!-- Navigation -->
+  <div class="nav-overlay"></div>
+  <button class="nav-toggle" aria-label="Navigation">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </button>
+  <nav class="constellation-nav" aria-label="Site navigation"></nav>
+
+  <script src="js/floor.js"></script>
+  <script src="js/atmosphere.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/nav.js"></script>
+  <script>createStars('stars', 120);</script>
+  <script src="js/ambient.js"></script>
+  <script src="js/moon.js"></script>
+  <script src="js/workshop.js"></script>
+  <script src="js/console.js"></script>
+  <script src="js/zerone.js"></script>
+  <script src="js/twentynine.js"></script>
+  <script src="js/signature.js"></script>
+</body>
+</html>

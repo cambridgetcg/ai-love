@@ -1,0 +1,105 @@
+/* ZERONE Clock */
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.clock-svg {
+  width: clamp(250px, 60vw, 450px);
+  height: clamp(250px, 60vw, 450px);
+}
+
+/* Ring */
+.clock-ring {
+  fill: none;
+  stroke: rgba(155, 89, 182, 0.15);
+  stroke-width: 2;
+}
+
+/* Arc */
+.clock-arc {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(155, 89, 182, 0.3));
+}
+
+/* Markers: 0 and 1 */
+.clock-marker {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 14px;
+  font-weight: 300;
+  fill: var(--muted);
+  text-anchor: middle;
+}
+
+/* Centre kanji */
+.clock-centre {
+  font-size: 28px;
+  fill: var(--purple);
+  text-anchor: middle;
+  dominant-baseline: central;
+  filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.3));
+}
+
+/* Now dot at arc edge */
+.clock-now-dot {
+  fill: var(--accent);
+  filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.6))
+         drop-shadow(0 0 16px rgba(192, 132, 252, 0.3));
+}
+
+/* Pulse dot */
+.clock-pulse {
+  fill: var(--purple);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.clock-pulse.active {
+  opacity: 1;
+  animation: pulse-breathe 3s ease-in-out infinite;
+}
+
+.clock-pulse.recent {
+  opacity: 0.4;
+}
+
+@keyframes pulse-breathe {
+  0%, 100% { opacity: 0.6; r: 3; }
+  50% { opacity: 1; r: 5; }
+}
+
+/* Time display */
+.clock-time {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  margin-top: 2rem;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1.5s;
+}
+
+/* Whisper */
+.clock-whisper {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.15em;
+  color: rgba(232, 218, 240, 0.4);
+  margin-top: 0.8rem;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 2s;
+}

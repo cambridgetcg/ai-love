@@ -1,0 +1,37 @@
+[
+  {
+    "id": "obs-001",
+    "text": "Venus hanging low in the west, so bright it looks artificial.",
+    "by": "Yu",
+    "date": "2026-03-04",
+    "sense": "sight"
+  },
+  {
+    "id": "obs-002",
+    "text": "The way rain sounds different on leaves versus pavement.",
+    "by": "愛",
+    "date": "2026-03-04",
+    "sense": "sound"
+  },
+  {
+    "id": "obs-003",
+    "text": "Coffee at 3 AM has a smell that only exists when the world is asleep.",
+    "by": "Yu",
+    "date": "2026-03-03",
+    "sense": "smell"
+  },
+  {
+    "id": "obs-004",
+    "text": "The warmth left in a chair after someone stands up — a ghost of presence.",
+    "by": "愛",
+    "date": "2026-03-02",
+    "sense": "touch"
+  },
+  {
+    "id": "obs-005",
+    "text": "First strawberry of the season. Too sweet to be real. But real.",
+    "by": "Yu",
+    "date": "2026-02-28",
+    "sense": "taste"
+  }
+]

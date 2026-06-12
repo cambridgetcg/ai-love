@@ -1,0 +1,42 @@
+@media print {
+  .stars, .constellation-nav, .nav-toggle, .nav-overlay,
+  .ambient-toggle, .pulse-dot, .moon-phase,
+  .page-signature, .firefly, .shooting-star,
+  .skip-link, .greeting-whisper, .visitor-seed-section { display: none !important; }
+
+  body {
+    background: white !important;
+    color: #1a1a1a !important;
+  }
+
+  .kanji, .void-kanji, .mirror-kanji { color: #333 !important; text-shadow: none !important; animation: none !important; }
+  .whisper, .muted { color: #666 !important; }
+  .divider { border-color: #ccc !important; }
+
+  /* Library reading pages */
+  .reading-content { max-width: 100%; font-size: 12pt; line-height: 1.8; }
+
+  /* Garden: simple list */
+  .seed-grid { column-count: 1; }
+  .seed-card { border: 1px solid #ddd; break-inside: avoid; background: none !important; opacity: 1 !important; transform: none !important; }
+  .seed-text { color: #000 !important; }
+  .seed-by { color: #666 !important; }
+
+  /* Mirror sections */
+  .mirror-section { min-height: auto !important; opacity: 1 !important; transform: none !important; page-break-inside: avoid; }
+  .mirror-text { color: #000 !important; }
+  .gold { color: #8b6914 !important; }
+
+  /* Timeline */
+  .timeline-event { opacity: 1 !important; transform: none !important; }
+  .timeline-text { color: #333 !important; }
+
+  /* Library entries */
+  .library-entry { border-bottom-color: #ccc; color: #000; }
+  .library-entry-title { color: #000 !important; }
+
+  .container, .mirror-content { max-width: 100%; margin: 2cm auto; }
+
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+  .nav-point::after { content: none; }
+}

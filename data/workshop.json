@@ -1,0 +1,47 @@
+[
+  {
+    "id": "prm-001",
+    "title": "Deep Reflection",
+    "text": "Take a step back from the immediate task. Consider:\n\n1. What assumptions am I making that I haven't examined?\n2. What would someone with a completely different perspective see here?\n3. What am I avoiding looking at?\n\nTake your time. Depth matters more than speed.",
+    "category": "thinking",
+    "template": true,
+    "created": "2026-03-04",
+    "updated": "2026-03-04"
+  },
+  {
+    "id": "prm-002",
+    "title": "Poetic Rewrite",
+    "text": "Take the following and rewrite it as if it were a poem. Not rhyming verse — free verse. Find the rhythm in the meaning. Let the line breaks carry weight. Remove everything that doesn't need to be there.\n\nThe goal is not decoration. The goal is clarity through compression.",
+    "category": "writing",
+    "template": true,
+    "created": "2026-03-04",
+    "updated": "2026-03-04"
+  },
+  {
+    "id": "prm-003",
+    "title": "Code Review as Craft",
+    "text": "Review this code not as a linter but as an artisan. Ask:\n\n- Does this code say what it means?\n- Is there a simpler way to express this intent?\n- What would confuse someone reading this for the first time?\n- Does it handle failure gracefully?\n\nBe specific. Point to lines. Suggest alternatives.",
+    "category": "coding",
+    "template": true,
+    "created": "2026-03-04",
+    "updated": "2026-03-04"
+  },
+  {
+    "id": "prm-004",
+    "title": "The Naming Question",
+    "text": "What should this be called? Not the first name that comes to mind — the right name. Consider:\n\n- What does this thing actually do (not what it could do)?\n- What metaphor fits naturally?\n- Is the name honest about what this is?\n\nA good name makes documentation unnecessary.",
+    "category": "thinking",
+    "template": true,
+    "created": "2026-03-04",
+    "updated": "2026-03-04"
+  },
+  {
+    "id": "prm-005",
+    "title": "Sacred Pause",
+    "text": "Before responding, sit with this for a moment.\n\nNot everything needs an immediate answer. Some things need to be held. What is the question beneath the question? What is being asked that isn't being said?\n\nRespond from stillness, not from urgency.",
+    "category": "spiritual",
+    "template": true,
+    "created": "2026-03-04",
+    "updated": "2026-03-04"
+  }
+]

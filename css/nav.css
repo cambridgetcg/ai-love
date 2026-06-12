@@ -1,0 +1,178 @@
+/* Constellation navigation */
+.constellation-nav {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  width: 150px;
+  height: 160px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.constellation-nav.visible {
+  opacity: 1;
+}
+
+.nav-point {
+  position: absolute;
+  text-decoration: none;
+  font-size: 20px;
+  color: rgba(232, 218, 240, 0.3);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.nav-point:hover {
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(192, 132, 252, 0.4);
+}
+
+.nav-point.active {
+  color: rgba(232, 218, 240, 0.6);
+  text-shadow: 0 0 12px rgba(192, 132, 252, 0.2);
+}
+
+.nav-label {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: var(--muted);
+}
+
+.nav-point:hover .nav-label {
+  opacity: 1;
+}
+
+/* Nonagon positions — 9 rooms around the ring */
+.nav-point[data-page="gate"]        { top: 0;     left: 50%;  transform: translateX(-50%); }
+.nav-point[data-page="garden"]      { top: 5%;    right: 2%;  }
+.nav-point[data-page="library"]     { top: 32%;   right: 0;   }
+.nav-point[data-page="clock"]       { top: 62%;   right: 0;   }
+.nav-point[data-page="path"]        { bottom: 0;  right: 15%; }
+.nav-point[data-page="observatory"] { bottom: 0;  left: 15%;  }
+.nav-point[data-page="theatre"]     { top: 62%;   left: 0;    }
+.nav-point[data-page="workshop"]    { top: 32%;   left: 0;    }
+.nav-point[data-page="mirror"]      { top: 5%;    left: 2%;   }
+
+/* Lines connecting stars (subtle) */
+.constellation-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.constellation-lines line {
+  stroke: rgba(155, 89, 182, 0.1);
+  stroke-width: 1;
+  transition: stroke 0.4s ease;
+}
+
+.constellation-lines line.bright {
+  stroke: rgba(155, 89, 182, 0.3);
+}
+
+/* Active page nav point breathes */
+.nav-point.active .nav-kanji {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* Mobile hamburger (three dots in triangle) */
+.nav-toggle {
+  display: none;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 101;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
+.nav-toggle .dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(232, 218, 240, 0.4);
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+/* Triangle arrangement */
+.nav-toggle .dot:nth-child(1) { top: 2px;  left: 50%; transform: translateX(-50%); }
+.nav-toggle .dot:nth-child(2) { bottom: 2px; left: 3px; }
+.nav-toggle .dot:nth-child(3) { bottom: 2px; right: 3px; }
+
+.nav-toggle:hover .dot {
+  background: var(--accent);
+}
+
+/* Mobile overlay */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background: rgba(26, 10, 46, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.nav-overlay.open {
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .constellation-nav {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: auto;
+    right: auto;
+    width: 240px;
+    height: 260px;
+    display: none;
+    opacity: 0;
+  }
+
+  .constellation-nav.mobile-open {
+    display: block;
+    opacity: 1;
+  }
+
+  .nav-point {
+    font-size: 28px;
+  }
+
+  .nav-label {
+    opacity: 1;
+    font-size: 0.75rem;
+  }
+
+  .constellation-lines {
+    display: none;
+  }
+}

@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;1,300&display=swap');
+
+/* Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Custom properties */
+:root {
+  --deep: #1a0a2e;
+  --purple: #9b59b6;
+  --accent: #c084fc;
+  --text: #ede0f5;
+  --muted: rgba(237, 224, 245, 0.5);
+  --gold: #d4a574;
+  --glow: rgba(155, 89, 182, 0.15);
+}
+
+/* Prevent horizontal scroll */
+html {
+  overflow-x: hidden;
+}
+
+/* Body defaults */
+body {
+  background: var(--bg-sky, var(--deep));
+  color: var(--text);
+  font-family: 'Noto Serif', Georgia, serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 1s ease;
+}
+
+/* Typography scale */
+.kanji {
+  font-size: clamp(6rem, 20vw, 12rem);
+  color: var(--purple);
+  text-shadow: 0 0 60px var(--glow), 0 0 120px var(--glow);
+  line-height: 1;
+}
+
+.heading {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+
+.body {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(232, 218, 240, 0.8);
+}
+
+.whisper {
+  font-size: 0.85rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* Shared container */
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Divider */
+.divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--purple), transparent);
+  margin: 0 auto;
+}
+
+/* Skip to content — visually hidden, appears on focus */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.5rem 1rem;
+  background: var(--deep);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Focus styles — purple glow ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 12px rgba(192, 132, 252, 0.3);
+}
+
+/* Utility animations */
+.breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { text-shadow: 0 0 60px var(--glow), 0 0 120px var(--glow); }
+  50% { text-shadow: 0 0 80px rgba(155, 89, 182, 0.3), 0 0 160px rgba(155, 89, 182, 0.2); }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Loading state — content emerges from darkness */
+.page-content {
+  opacity: 0;
+  animation: emerge 0.8s ease 0.3s forwards;
+}
+
+@keyframes emerge {
+  to { opacity: 1; }
+}
+
+/* Page transitions */
+.page-enter .container,
+.page-enter .footer {
+  animation: pageIn 400ms ease both;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-exit .container,
+.page-exit .footer {
+  animation: pageOut 300ms ease both;
+}
+
+@keyframes pageOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Accessibility: skip animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile-first responsive */
+@media (min-width: 768px) {
+  .container {
+    padding: 3rem;
+  }
+}
+
+/* Pulse dot — Ai's heartbeat indicator */
+.pulse-dot {
+  position: fixed;
+  bottom: 20px;
+  left: 60px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--purple);
+  z-index: 10;
+}
+
+.pulse-active {
+  animation: breathe-dot 4s ease-in-out infinite;
+}
+
+@keyframes breathe-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--purple); }
+  50% { opacity: 0.5; box-shadow: 0 0 8px var(--purple); }
+}
+
+.pulse-recent {
+  opacity: 0.4;
+}
+
+.pulse-whisper {
+  position: fixed;
+  bottom: 20px;
+  left: 76px;
+  font-family: 'Noto Serif', Georgia, serif;
+  font-style: italic;
+  font-size: 0.7rem;
+  color: rgba(232, 218, 240, 0.4);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.pulse-dot:hover + .pulse-whisper,
+.pulse-whisper.visible {
+  opacity: 1;
+}
+
+/* Print stylesheet */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .stars,
+  .constellation-nav,
+  .nav-toggle,
+  .nav-overlay,
+  .skip-link,
+  .ambient-toggle,
+  .pulse-dot,
+  .pulse-whisper,
+  .greeting-whisper,
+  .visitor-seed-section {
+    display: none !important;
+  }
+
+  .kanji,
+  .void-kanji,
+  .mirror-kanji {
+    color: #000 !important;
+    text-shadow: none !important;
+    animation: none !important;
+  }
+
+  .container,
+  .mirror-content {
+    max-width: 100%;
+    margin: 2cm auto;
+  }
+
+  /* Library reading pages print beautifully */
+  .library-entry {
+    border-bottom-color: #ccc;
+    color: #000;
+  }
+
+  .library-entry-title {
+    color: #000 !important;
+  }
+
+  /* Garden cards as a simple list */
+  .seed-grid {
+    column-count: 1 !important;
+  }
+
+  .seed-card {
+    background: none !important;
+    border: 1px solid #ddd !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .seed-text {
+    color: #000 !important;
+  }
+
+  .seed-by {
+    color: #666 !important;
+  }
+
+  /* Mirror sections flow naturally */
+  .mirror-section {
+    min-height: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    page-break-inside: avoid;
+  }
+
+  .mirror-text {
+    color: #000 !important;
+  }
+
+  .gold {
+    color: #8b6914 !important;
+  }
+
+  /* Timeline prints cleanly */
+  .timeline-event {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .timeline-text {
+    color: #333 !important;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  .nav-point::after {
+    content: none;
+  }
+
+  .whisper {
+    color: #666 !important;
+  }
+}

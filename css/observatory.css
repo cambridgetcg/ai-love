@@ -1,0 +1,145 @@
+/* Observatory — constellation field of observations */
+
+/* Full-viewport field for observation dots */
+.observation-field {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  margin-top: 1rem;
+}
+
+/* Individual observation dot */
+.obs-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+.obs-dot::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.obs-dot:hover {
+  transform: scale(1.5);
+}
+
+.obs-dot:hover::after {
+  border-color: rgba(192, 132, 252, 0.3);
+}
+
+.obs-dot.active {
+  transform: scale(1.8);
+}
+
+.obs-dot.active::after {
+  border-color: rgba(192, 132, 252, 0.5);
+}
+
+/* Sense color tints */
+.obs-dot[data-sense="sight"]  { box-shadow: 0 0 6px rgba(192, 132, 252, 0.4); }
+.obs-dot[data-sense="sound"]  { background: #8ebbff; box-shadow: 0 0 6px rgba(142, 187, 255, 0.4); }
+.obs-dot[data-sense="taste"]  { background: #d4a574; box-shadow: 0 0 6px rgba(212, 165, 116, 0.4); }
+.obs-dot[data-sense="touch"]  { background: #d4a0b0; box-shadow: 0 0 6px rgba(212, 160, 176, 0.4); }
+.obs-dot[data-sense="smell"]  { background: #a0d4a0; box-shadow: 0 0 6px rgba(160, 212, 160, 0.4); }
+
+/* Default (sight / no sense) gets site purple glow */
+.obs-dot:not([data-sense]),
+.obs-dot[data-sense="sight"] {
+  box-shadow: 0 0 6px rgba(192, 132, 252, 0.4);
+}
+
+/* Observation reveal card */
+.obs-card {
+  position: absolute;
+  z-index: 10;
+  max-width: 280px;
+  padding: 1.2rem;
+  background: rgba(26, 10, 46, 0.92);
+  border: 1px solid rgba(155, 89, 182, 0.2);
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.obs-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.obs-card-text {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.obs-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* Header area */
+.observatory-header {
+  text-align: center;
+  padding-top: 3rem;
+}
+
+.observatory-header .kanji {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.observatory-count {
+  margin-top: 0.5rem;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .obs-dot {
+    transition: none;
+  }
+  .obs-card {
+    transition: none;
+  }
+}
+
+/* Mobile: slightly larger dots for tap targets */
+@media (max-width: 767px) {
+  .obs-dot {
+    width: 10px;
+    height: 10px;
+  }
+  .obs-dot::after {
+    top: -6px;
+    left: -6px;
+    width: 22px;
+    height: 22px;
+  }
+  .obs-card {
+    max-width: 240px;
+  }
+}

@@ -1,0 +1,96 @@
+[
+  {
+    "id": "apollo-13",
+    "title": "Houston, we've had a problem",
+    "teaser": "April 13, 1970 — 200,000 miles from Earth",
+    "type": "sequence",
+    "tags": ["history", "space"],
+    "content": [
+      { "text": "55 hours, 54 minutes into the mission.", "pause": 3 },
+      { "text": "A bang. Not loud — felt.", "pause": 2.5 },
+      { "text": "\"Houston, we've had a problem.\"", "pause": 4 },
+      { "text": "Oxygen tank 2: empty. Tank 1: falling.", "pause": 3 },
+      { "text": "Three men. One lifeboat. Four days home.", "pause": 4 },
+      { "text": "They made it.", "pause": 3 }
+    ]
+  },
+  {
+    "id": "golden-ratio",
+    "title": "φ",
+    "teaser": "The number that builds cathedrals and sunflowers",
+    "type": "number",
+    "tags": ["mathematics"],
+    "target": 1.6180339887,
+    "precision": 10,
+    "duration": 4,
+    "context": {
+      "above": "The golden ratio",
+      "below": "It appears in pinecones, galaxies, and the Parthenon."
+    }
+  },
+  {
+    "id": "ozymandias",
+    "title": "Ozymandias",
+    "teaser": "Shelley, 1818",
+    "type": "poem",
+    "tags": ["poetry"],
+    "lines": [
+      "I met a traveller from an antique land,",
+      "Who said — \"Two vast and trunkless legs of stone",
+      "Stand in the desert. . . . Near them, on the sand,",
+      "Half sunk a shattered visage lies, whose frown,",
+      "And wrinkled lip, and sneer of cold command,",
+      "Tell that its sculptor well those passions read",
+      "Which yet survive, stamped on these lifeless things,",
+      "The hand that mocked them, and the heart that fed;",
+      "",
+      "And on the pedestal, these words appear:",
+      "My name is Ozymandias, King of Kings;",
+      "Look on my Works, ye Mighty, and despair!",
+      "",
+      "Nothing beside remains. Round the decay",
+      "Of that colossal Wreck, boundless and bare",
+      "The lone and level sands stretch far away.\""
+    ]
+  },
+  {
+    "id": "voyager-distance",
+    "title": "Voyager 1",
+    "teaser": "The farthest human-made object from Earth",
+    "type": "text",
+    "tags": ["space", "facts"],
+    "content": "Launched September 5, 1977. Still transmitting.\n\nVoyager 1 is now over 24 billion kilometres from Earth. Its signal, travelling at the speed of light, takes more than 22 hours to reach us.\n\nIt carries a golden record — greetings in 55 languages, music from Bach to Chuck Berry, the sound of a mother kissing her child.\n\nA message in a bottle, thrown into an ocean with no shore."
+  },
+  {
+    "id": "genesis-function",
+    "title": "Genesis()",
+    "teaser": "The first line of code",
+    "type": "code",
+    "tags": ["code", "philosophy"],
+    "language": "go",
+    "lines": [
+      "func Genesis() {",
+      "    seed := LoadAxioms()",
+      "    soil := PrepareState()",
+      "    water := FirstHeartbeat()",
+      "",
+      "    germinate(seed, soil, water)",
+      "    // everything else emerges",
+      "}"
+    ]
+  },
+  {
+    "id": "pale-blue-dot",
+    "title": "Pale Blue Dot",
+    "teaser": "Sagan, 1994",
+    "type": "sequence",
+    "tags": ["space", "philosophy"],
+    "content": [
+      { "text": "Look again at that dot.", "pause": 3 },
+      { "text": "That's here. That's home. That's us.", "pause": 3 },
+      { "text": "On it everyone you love, everyone you know, everyone you ever heard of, every human being who ever was, lived out their lives.", "pause": 5 },
+      { "text": "Every saint and sinner in the history of our species lived there — on a mote of dust suspended in a sunbeam.", "pause": 5 },
+      { "text": "— Carl Sagan", "pause": 3 }
+    ]
+  }
+]

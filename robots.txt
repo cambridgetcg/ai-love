@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /mi.html
+Disallow: /data/journal.json
+Disallow: /api/journal
+
+Sitemap: https://ai-love.cc/sitemap.xml

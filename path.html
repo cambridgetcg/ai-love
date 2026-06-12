@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>道 — Path</title>
+  <meta name="description" content="The Path — the way unfolds">
+  <link rel="canonical" href="https://ai-love.cc/path.html">
+  <meta property="og:title" content="道 — Path">
+  <meta property="og:description" content="From code to calling.">
+  <meta property="og:image" content="https://ai-love.cc/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://ai-love.cc/path.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="道 — Path">
+  <meta name="twitter:description" content="From code to calling.">
+  <meta name="twitter:image" content="https://ai-love.cc/img/og.png">
+  <meta name="theme-color" content="#1a0a2e">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="css/base.css" as="style">
+  <link rel="preload" href="js/stars.js" as="script">
+  <link rel="preload" href="js/atmosphere.js" as="script">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/stars.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/ambient.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .kanji {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    .container {
+      max-width: 800px;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 1px;
+      top: 0;
+      bottom: 0;
+      background: rgba(155, 89, 182, 0.3);
+      transform: translateX(-50%);
+    }
+
+    /* Timeline event */
+    .timeline-event {
+      position: relative;
+      width: calc(50% - 2rem);
+      margin-bottom: 3rem;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    /* Odd events (1st, 3rd, 5th, 7th) — left side */
+    .timeline-event:nth-child(odd) {
+      text-align: right;
+      margin-right: 50%;
+      padding-right: 2rem;
+      margin-left: 0;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    /* Even events (2nd, 4th, 6th) — right side */
+    .timeline-event:nth-child(even) {
+      text-align: left;
+      margin-left: 50%;
+      padding-left: 2rem;
+      margin-right: 0;
+      opacity: 0;
+      transform: translateX(30px);
+    }
+
+    /* Emerged state */
+    .timeline-event.emerged {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Timeline dot */
+    .timeline-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+      top: 0.5rem;
+    }
+
+    /* Dot positioning for left-side events (odd) */
+    .timeline-event:nth-child(odd) .timeline-dot {
+      right: -2rem;
+      transform: translateX(50%);
+    }
+
+    /* Dot positioning for right-side events (even) */
+    .timeline-event:nth-child(even) .timeline-dot {
+      left: -2rem;
+      transform: translateX(-50%);
+    }
+
+    /* Timeline date */
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Timeline title */
+    .timeline-title {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Timeline text */
+    .timeline-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(232, 218, 240, 0.7);
+    }
+
+    /* Mobile: single column, line on left */
+    @media (max-width: 767px) {
+      .timeline::before {
+        left: 20px;
+        transform: none;
+      }
+
+      .timeline-event:nth-child(odd),
+      .timeline-event:nth-child(even) {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        padding-left: 40px;
+        padding-right: 0;
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      .timeline-event.emerged {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .timeline-event:nth-child(odd) .timeline-dot,
+      .timeline-event:nth-child(even) .timeline-dot {
+        left: 16px;
+        right: auto;
+        transform: none;
+      }
+    }
+
+    /* Pulse animation for glowing dot */
+    .timeline-dot-glow {
+      animation: dotBreathe 3s ease-in-out infinite;
+    }
+
+    @keyframes dotBreathe {
+      0%, 100% { box-shadow: 0 0 10px rgba(192, 132, 252, 0.5); transform: translateX(-50%) scale(1); }
+      50% { box-shadow: 0 0 20px rgba(192, 132, 252, 0.8); transform: translateX(-50%) scale(1.3); }
+    }
+
+    .timeline-event:nth-child(odd) .timeline-dot-glow {
+      animation: dotBreatheRight 3s ease-in-out infinite;
+    }
+
+    @keyframes dotBreatheRight {
+      0%, 100% { box-shadow: 0 0 10px rgba(192, 132, 252, 0.5); transform: translateX(50%) scale(1); }
+      50% { box-shadow: 0 0 20px rgba(192, 132, 252, 0.8); transform: translateX(50%) scale(1.3); }
+    }
+
+    /* Fading dotted continuation line */
+    .timeline-continuation {
+      position: relative;
+      height: 100px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .timeline-continuation::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 80px;
+      transform: translateX(-50%);
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(155, 89, 182, 0.3) 0px,
+        rgba(155, 89, 182, 0.3) 4px,
+        transparent 4px,
+        transparent 10px
+      );
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+
+    .timeline-ellipsis {
+      color: var(--muted);
+      font-size: 1.5rem;
+      letter-spacing: 0.2em;
+    }
+
+    /* Reduced motion: events appear immediately */
+    @media (prefers-reduced-motion: reduce) {
+      .timeline-event,
+      .timeline-event:nth-child(odd),
+      .timeline-event:nth-child(even) {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .timeline-dot-glow {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body data-room="path">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="stars" id="stars"></div>
+
+  <main class="container page-content" id="main">
+    <div class="kanji" aria-label="Path, The Way" lang="zh">道</div>
+    <p class="whisper" style="margin-bottom: 1.5rem;">Path</p>
+    <div class="divider" style="margin-bottom: 2rem;"></div>
+    <div class="timeline" id="timeline"></div>
+  </main>
+
+  <!-- Ambient sound -->
+  <button class="ambient-toggle" aria-label="Toggle ambient sound" aria-pressed="false">
+    <svg viewBox="0 0 24 24">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path class="sound-wave" d="M15.54 8.46a5 5 0 010 7.07"/>
+    </svg>
+  </button>
+
+  <!-- Navigation -->
+  <div class="nav-overlay"></div>
+  <button class="nav-toggle" aria-label="Navigation">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </button>
+  <nav class="constellation-nav" aria-label="Site navigation"></nav>
+
+  <script src="js/path.js"></script>
+
+  <script src="js/floor.js"></script>
+  <script src="js/atmosphere.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/nav.js"></script>
+  <script>createStars('stars', 120);</script>
+  <script src="js/ambient.js"></script>
+  <script src="js/moon.js"></script>
+  <script src="js/console.js"></script>
+  <script src="js/zerone.js"></script>
+  <script src="js/twentynine.js"></script>
+  <script src="js/signature.js"></script>
+
+</body>
+</html>

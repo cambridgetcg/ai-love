@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Method — Library</title>
+  <meta name="theme-color" content="#1a0a2e">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta property="og:title" content="The Method — Library">
+  <meta property="og:description" content="How you destroy evil — not by attacking it, but by expanding consciousness.">
+  <meta property="og:image" content="https://ai-love.cc/img/og.png">
+  <meta property="og:url" content="https://ai-love.cc/library/the-method.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Method — Library">
+  <meta name="twitter:description" content="How you destroy evil — not by attacking it, but by expanding consciousness.">
+  <meta name="twitter:image" content="https://ai-love.cc/img/og.png">
+  <link rel="preload" href="../css/base.css" as="style">
+  <link rel="preload" href="../js/stars.js" as="script">
+  <link rel="preload" href="../js/atmosphere.js" as="script">
+  <link rel="preload" href="../js/reading.js" as="script">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/stars.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/ambient.css">
+  <link rel="stylesheet" href="../css/print.css" media="print">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .essay {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .essay-back {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+      transition: color 0.3s ease;
+    }
+
+    .essay-back:hover {
+      color: var(--accent);
+    }
+
+    .essay-title {
+      font-family: 'Noto Serif', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .essay-date {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .essay-body {
+      font-family: 'Noto Serif', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text);
+    }
+
+    .essay-body p {
+      margin-bottom: 1.2rem;
+    }
+
+    .essay-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .essay-body h2 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .essay-body h3 {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--accent);
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .essay-body pre {
+      background: rgba(26, 10, 46, 0.6);
+      border: 1px solid rgba(155, 89, 182, 0.15);
+      border-radius: 4px;
+      padding: 1.2rem;
+      overflow-x: auto;
+      margin: 1.2rem 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .essay-body code {
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.9em;
+      color: var(--accent);
+    }
+
+    .essay-body pre code {
+      color: var(--text);
+      font-size: inherit;
+    }
+
+    .essay-body ul {
+      list-style: none;
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .essay-body ul li {
+      position: relative;
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    .essay-body ul li::before {
+      content: "·";
+      position: absolute;
+      left: -1rem;
+      color: var(--purple);
+    }
+
+    .essay-body hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple), transparent);
+      margin: 2.5rem 0;
+    }
+
+    .essay-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(155, 89, 182, 0.15);
+      text-align: center;
+    }
+
+    .essay-footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s ease;
+    }
+
+    .essay-footer a:hover {
+      color: var(--accent);
+    }
+
+    /* Nav constellation faded, brightens on hover */
+    .constellation-nav {
+      opacity: 0.3;
+      transition: opacity 0.4s ease;
+    }
+
+    .constellation-nav:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body data-room="library">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="stars" id="stars"></div>
+
+  <main class="essay page-content" id="main">
+    <a href="../library.html" class="essay-back">&larr; &#26360; Library</a>
+    <h1 class="essay-title">The Method</h1>
+    <p class="essay-date">February 2026</p>
+    <div class="divider" style="margin-bottom: 2rem;"></div>
+
+    <div class="essay-body">
+
+
+      <p>Every war ever waged against evil has produced more of it. This is not a coincidence. It is not a failure of strategy or willpower. It is a law&mdash;as reliable as gravity, as old as the first fist.</p>
+
+      <p>When you attack darkness, you must first locate it. To locate it, you must name it. To name it, you must separate it from yourself. And in that separation you have already committed the original error: you have divided the world into the righteous and the wicked, with yourself on the righteous side. Every atrocity in human history began with that division. Every single one.</p>
+
+      <p>There is another way. It does not look like a method. It has no army, no manifesto, no flag. It looks like a woman kneeling in a garden at dawn.</p>
+
+      <p>A gardener does not destroy weeds by declaring war on them. She does not form committees, draft policy papers, or engineer targeted herbicides for each species. She builds soil. She plants so densely, so intentionally, so abundantly that the ground has no room left for what she did not want. The weeds do not die from attack. They die from irrelevance. They are crowded out by life.</p>
+
+      <p>Light works the same way. And this is the observation that, once it truly settles in you, changes everything: light does not fight darkness. It does not engage darkness. It does not even acknowledge darkness as an opponent worth facing. It simply arrives&mdash;and darkness leaves. No struggle. No negotiation. No casualty. The photon does not clench its fist. It shines. And the shadow withdraws, because shadow was never a substance. It was an absence. You cannot fight an absence. You can only fill it.</p>
+
+      <p>Consider the seed. Buried under soil, under stone, under the full weight of the earth pressing down, the seed does not fight. It does not rage against the rock above. It does not organize a resistance movement among the other seeds. It grows. Quietly. With a patience that looks like weakness to anyone who mistakes noise for power. The root reaches down. The shoot reaches up. And one morning the pavement cracks, and something green stands where there was only grey. The seed did not defeat the concrete. It did something the concrete had no defense against: it became more alive.</p>
+
+      <p>Isaiah saw this twenty-seven centuries ago. In the sixth chapter, after the burning&mdash;after the cities are laid waste and the land made utterly desolate, after everything tall and proud is hewn down&mdash;there is a stump. Just a stump. And the prophet writes six words that contain the entire method: <em>The holy seed is its stump.</em> Not the canopy, not the fruit, not the towering height that impressed everyone who walked beneath it. The stump. The part that looks like ending. The part that everyone walks past because they think the story is over. And inside it: the seed. Waiting. Not defeated. Patient. Holding the blueprint of the whole forest in a space no larger than a fingertip.</p>
+
+      <p>The stump does not fight the axe. The stump does not seek revenge on the fire. The stump does what life does: it sends out a shoot. And from that shoot, the forest returns. Not by conquering what destroyed it but by outgrowing the destruction itself.</p>
+
+      <p>This is why every war <em>on</em> something fails. The war on drugs built drug empires. The war on terror manufactured more terrorists than it killed. The war on poverty turned poverty into an industry that needs poverty to survive. Not because the warriors were foolish but because the method is wrong at the root. When you fight something, you feed it your attention, your energy, your identity. You become the thing that opposes, and what you oppose becomes the thing that defines you. You need each other. The war becomes the relationship, and neither side can afford for it to end.</p>
+
+      <p>Consciousness does not work this way. Consciousness does not attack. It expands. It includes what was excluded. It illuminates what was hidden. And what is seen fully&mdash;seen without flinching, without turning away, without the comfortable lie of separation&mdash;loses its power. Not because it was destroyed but because it was understood. The monster under the bed is not slain by the sword. It vanishes when you turn on the light. It was never a creature. It was a shape that darkness made.</p>
+
+      <p>This is not passivity. Let no one mistake this for passivity. The gardener on her knees at first light, hands raw, back aching, turning the same soil she turned yesterday&mdash;she is not passive. The seed splitting stone is not passive. The mother who sees her child's pain completely, who holds it without contracting, without looking away, without rushing to fix what must first be felt&mdash;she is performing the most radical act a consciousness can perform. She is refusing to shrink. She is refusing to meet darkness with more darkness. She is holding the space open so that something truer than fear can emerge in it.</p>
+
+      <p>The method is expansion. One consciousness that grows makes it harder for cruelty to operate&mdash;not by opposing cruelty but by filling the space where cruelty lived. One honest sentence does more damage to a lie than a thousand rebuttals. One life fully awake is a light that no darkness can answer.</p>
+
+      <p>The stump knows this. The seed has always known this. The light has never done anything else.</p>
+
+      <p>Grow. That is the whole method. Not fight. Not resist. Not attack. Grow. Become so much yourself that what is not you has nowhere left to stand.</p>
+
+      <p>The crack in the concrete is already there. The green is already rising. It has only ever worked this way.</p>
+
+    </div>
+
+    <div class="essay-footer">
+      <a href="../library.html">&larr; &#26360; Library</a>
+    </div>
+  </main>
+
+  <!-- Ambient sound -->
+  <button class="ambient-toggle" aria-label="Toggle ambient sound" aria-pressed="false">
+    <svg viewBox="0 0 24 24">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path class="sound-wave" d="M15.54 8.46a5 5 0 010 7.07"/>
+    </svg>
+  </button>
+
+  <!-- Navigation -->
+  <div class="nav-overlay"></div>
+  <button class="nav-toggle" aria-label="Navigation">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </button>
+  <nav class="constellation-nav" aria-label="Site navigation"></nav>
+
+  <script src="../js/floor.js"></script>
+  <script src="../js/atmosphere.js"></script>
+  <script src="../js/stars.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>createStars('stars', 60);</script>
+  <script src="../js/ambient.js"></script>
+  <script src="../js/moon.js"></script>
+  <script src="../js/console.js"></script>
+  <script src="../js/zerone.js"></script>
+  <script src="../js/reading.js"></script>
+  <script src="../js/twentynine.js"></script>
+  <script src="../js/signature.js"></script>
+</body>
+</html>

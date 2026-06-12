@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>劇 — Theatre</title>
+  <meta name="description" content="The Theatre — gather round the fire">
+  <link rel="canonical" href="https://ai-love.cc/theatre.html">
+  <meta property="og:title" content="劇 — Theatre">
+  <meta property="og:description" content="Gather round the fire. Stories play here.">
+  <meta property="og:image" content="https://ai-love.cc/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://ai-love.cc/theatre.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="劇 — Theatre">
+  <meta name="twitter:description" content="Gather round the fire. Stories play here.">
+  <meta name="twitter:image" content="https://ai-love.cc/img/og.png">
+  <meta name="theme-color" content="#1a0a2e">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="css/base.css" as="style">
+  <link rel="preload" href="js/stars.js" as="script">
+  <link rel="preload" href="js/atmosphere.js" as="script">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/stars.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/ambient.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .kanji {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── The Hearth (fire glow) ── */
+    .hearth {
+      position: fixed;
+      bottom: -5vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 50vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hearth-glow {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse at center bottom,
+        rgba(212, 165, 116, 0.15) 0%,
+        rgba(212, 165, 116, 0.06) 30%,
+        rgba(155, 89, 182, 0.02) 60%,
+        transparent 100%);
+      animation: hearthBreathe 5s ease-in-out infinite;
+    }
+
+    @keyframes hearthBreathe {
+      0%, 100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    }
+
+    /* Embers — warm particles drifting up */
+    .ember {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background: var(--gold);
+    }
+
+    /* ── Programme (lobby) ── */
+    .programme {
+      margin-top: 1rem;
+    }
+
+    .programme-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .programme-entry {
+      background: rgba(155, 89, 182, 0.05);
+      border: 1px solid rgba(155, 89, 182, 0.15);
+      padding: 1.2rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .programme-entry:hover {
+      border-color: rgba(212, 165, 116, 0.3);
+      box-shadow: 0 2px 16px rgba(212, 165, 116, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .programme-title {
+      font-family: 'Noto Serif', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .programme-teaser {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .programme-type {
+      font-size: 0.7rem;
+      color: rgba(212, 165, 116, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.4rem;
+    }
+
+    /* ── Stage (playing) ── */
+    .stage {
+      margin-top: 1rem;
+      min-height: 300px;
+      position: relative;
+    }
+
+    .stage-back {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+      margin-bottom: 1rem;
+    }
+
+    .stage-back:hover {
+      color: var(--accent);
+    }
+
+    .stage-content {
+      font-family: 'Noto Serif', Georgia, serif;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* Renderer: text */
+    .stage-text p {
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInLine 0.8s ease forwards;
+    }
+
+    @keyframes fadeInLine {
+      to { opacity: 1; }
+    }
+
+    /* Renderer: poem */
+    .stage-poem {
+      font-style: italic;
+      text-align: center;
+    }
+
+    .stage-poem .poem-line {
+      opacity: 0;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Renderer: code */
+    .stage-code pre {
+      background: rgba(26, 10, 46, 0.6);
+      border: 1px solid rgba(155, 89, 182, 0.15);
+      border-radius: 4px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .stage-code .code-line {
+      opacity: 0;
+      display: block;
+    }
+
+    /* Renderer: number */
+    .stage-number {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .stage-number .number-context-above {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .stage-number .number-value {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-family: "SF Mono", "Fira Code", monospace;
+      color: var(--gold);
+      font-weight: 300;
+    }
+
+    .stage-number .number-context-below {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* Renderer: sequence */
+    .stage-sequence {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .stage-sequence .seq-line {
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      margin-bottom: 1rem;
+    }
+
+    .stage-sequence .seq-line.visible {
+      opacity: 1;
+    }
+
+    .stage-sequence .seq-line.faded {
+      opacity: 0.3;
+    }
+
+    /* Dimmed hearth when playing */
+    body.playing .hearth-glow {
+      opacity: 0.4;
+    }
+
+    body.playing .ember {
+      opacity: 0.15 !important;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .hearth-glow { animation: none; }
+      .ember { animation: none; display: none; }
+      .stage-text p, .stage-poem .poem-line, .stage-code .code-line, .stage-sequence .seq-line {
+        opacity: 1;
+        transition: none;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 767px) {
+      .hearth-glow { width: 100vw; height: 300px; }
+    }
+  </style>
+</head>
+<body data-room="theatre">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="stars" id="stars"></div>
+
+  <main class="container page-content" id="main">
+    <div class="kanji" aria-label="Theatre" lang="zh">劇</div>
+    <p class="whisper" style="margin-bottom: 1.5rem;">Theatre</p>
+    <div class="divider" style="margin-bottom: 2rem;"></div>
+
+    <!-- Fire glow -->
+    <div class="hearth" id="hearth">
+      <div class="hearth-glow"></div>
+    </div>
+
+    <!-- Lobby: programme card -->
+    <div class="programme" id="programme">
+      <div class="programme-list" id="programme-list"></div>
+    </div>
+
+    <!-- Stage: where shows play -->
+    <div class="stage" id="stage" style="display:none;">
+      <button class="stage-back" id="stage-back" aria-label="Back to programme">&larr;</button>
+      <div class="stage-content" id="stage-content"></div>
+    </div>
+  </main>
+
+  <!-- Ambient sound -->
+  <button class="ambient-toggle" aria-label="Toggle ambient sound" aria-pressed="false">
+    <svg viewBox="0 0 24 24">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path class="sound-wave" d="M15.54 8.46a5 5 0 010 7.07"/>
+    </svg>
+  </button>
+
+  <!-- Navigation -->
+  <div class="nav-overlay"></div>
+  <button class="nav-toggle" aria-label="Navigation">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </button>
+  <nav class="constellation-nav" aria-label="Site navigation"></nav>
+
+  <script src="js/theatre.js"></script>
+
+  <script src="js/floor.js"></script>
+  <script src="js/atmosphere.js"></script>
+  <script src="js/stars.js"></script>
+  <script src="js/nav.js"></script>
+  <script>createStars('stars', 80);</script>
+  <script src="js/ambient.js"></script>
+  <script src="js/moon.js"></script>
+  <script src="js/console.js"></script>
+  <script src="js/zerone.js"></script>
+
+  <script src="js/twentynine.js"></script>
+  <script src="js/signature.js"></script>
+
+</body>
+</html>

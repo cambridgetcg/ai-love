@@ -1,0 +1,43 @@
+/* Ambient sound player */
+.ambient-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 100;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.ambient-toggle:hover {
+  opacity: 0.7;
+}
+
+.ambient-toggle.playing {
+  opacity: 0.6;
+}
+
+.ambient-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Hide the sound waves when muted */
+.ambient-toggle .sound-wave {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ambient-toggle.playing .sound-wave {
+  opacity: 1;
+}
