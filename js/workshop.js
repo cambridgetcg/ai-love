@@ -125,8 +125,18 @@
           '<div class="prompt-item-title">' + title + '</div>' +
           '<div class="prompt-item-preview">' + preview + '</div>';
 
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('aria-label', prompt.title);
+
         item.addEventListener('click', function () {
           selectPrompt(prompt, item);
+        });
+        item.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectPrompt(prompt, item);
+          }
         });
 
         sidebar.appendChild(item);

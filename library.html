@@ -37,6 +37,12 @@
       justify-content: flex-start;
     }
 
+    /* Constrain the shelf on narrow screens so previews ellipsize
+       instead of growing the page past the viewport */
+    .container {
+      width: 100%;
+    }
+
     .kanji {
       font-size: 4rem;
       margin-bottom: 1.5rem;
@@ -143,7 +149,6 @@
   <script src="js/moon.js"></script>
   <script src="js/console.js"></script>
   <script src="js/zerone.js"></script>
-  <script src="js/reading.js"></script>
   <script src="js/twentynine.js"></script>
   <script src="js/signature.js"></script>
 

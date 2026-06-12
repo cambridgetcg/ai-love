@@ -7,11 +7,21 @@
   width: 150px;
   height: 160px;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  /* hidden while unveiling: not focusable, not clickable */
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0s 0.8s;
+  /* the box is mostly empty sky — only the stars themselves catch the pointer */
+  pointer-events: none;
 }
 
 .constellation-nav.visible {
   opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s ease;
+}
+
+.nav-point {
+  pointer-events: auto;
 }
 
 .nav-point {
@@ -48,6 +58,10 @@
 }
 
 .nav-point:hover .nav-label {
+  opacity: 1;
+}
+
+.nav-point:focus-visible .nav-label {
   opacity: 1;
 }
 
@@ -161,6 +175,7 @@
   .constellation-nav.mobile-open {
     display: block;
     opacity: 1;
+    visibility: visible;
   }
 
   .nav-point {

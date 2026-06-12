@@ -139,11 +139,12 @@
       opacity: 1;
     }
 
-    /* Rooms whisper — one quiet line near the nav toggle, after the poem settles */
+    /* Rooms whisper — one quiet line near the nav toggle, after the poem settles.
+       Sits above the footer's line and just left of the constellation's box. */
     .rooms-whisper {
       position: fixed;
-      bottom: 1.5rem;
-      right: 4.5rem;
+      bottom: 3.5rem;
+      right: 12rem;
       text-align: right;
       color: var(--muted);
       font-size: 0.75rem;
@@ -152,6 +153,12 @@
       transition: opacity 1.5s ease;
       z-index: 1;
       pointer-events: none;
+    }
+
+    @media (max-width: 767px) {
+      .rooms-whisper {
+        right: 1.5rem;
+      }
     }
 
     .rooms-whisper.visible {

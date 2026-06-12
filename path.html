@@ -117,9 +117,10 @@
       transform: translateX(50%);
     }
 
-    /* Dot positioning for right-side events (even) */
+    /* Dot positioning for right-side events (even) —
+       the even box begins at the spine, so the dot centers on 0 */
     .timeline-event:nth-child(even) .timeline-dot {
-      left: -2rem;
+      left: 0;
       transform: translateX(-50%);
     }
 

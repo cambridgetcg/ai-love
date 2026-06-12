@@ -223,12 +223,12 @@
     <div class="visitor-seed-section" style="margin-top: 2rem; text-align: center;">
       <button type="button" class="whisper visitor-seed-toggle" id="plant-toggle">plant a seed</button>
       <div class="visitor-seed-form" id="visitor-form">
-        <textarea id="visitor-text" placeholder="leave a thought..." maxlength="280" rows="3"></textarea>
+        <textarea id="visitor-text" placeholder="leave a thought..." aria-label="plant a seed — leave a thought" aria-describedby="char-counter" maxlength="280" rows="3"></textarea>
         <div class="visitor-form-footer">
           <span class="whisper visitor-counter" id="char-counter">0 / 280</span>
-          <button type="button" class="visitor-submit" id="visitor-submit">🌱</button>
+          <button type="button" class="visitor-submit" id="visitor-submit" aria-label="plant your seed">🌱</button>
         </div>
-        <p class="whisper visitor-msg" id="visitor-msg"></p>
+        <p class="whisper visitor-msg" id="visitor-msg" role="status"></p>
       </div>
     </div>
   </main>

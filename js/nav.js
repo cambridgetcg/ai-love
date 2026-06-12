@@ -30,6 +30,11 @@
   var toggle = document.querySelector('.nav-toggle');
   var overlay = document.querySelector('.nav-overlay');
 
+  // bfcache restores keep body classes — lift the exit veil on return
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) document.body.classList.remove('page-exit');
+  });
+
   if (!nav) return;
 
   // Page enter animation (non-Gate pages; Gate has its own entrance sequence)
@@ -59,7 +64,7 @@
     if (currentPage && page.id === currentPage.id) {
       a.classList.add('active');
     }
-    a.innerHTML = '<span class="nav-kanji">' + page.kanji + '</span>' +
+    a.innerHTML = '<span class="nav-kanji" lang="zh">' + page.kanji + '</span>' +
                   '<span class="nav-label">' + page.label + '</span>' +
                   '<span class="nav-story" style="position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:0.7rem;font-style:italic;color:var(--muted);opacity:0;transition:opacity 0.4s ease;pointer-events:none;">' + stories[page.id] + '</span>';
     nav.appendChild(a);
@@ -108,6 +113,7 @@
   var svg = document.createElementNS(svgNS, 'svg');
   svg.setAttribute('class', 'constellation-lines');
   svg.setAttribute('viewBox', '0 0 150 140');
+  svg.setAttribute('aria-hidden', 'true');
   edges.forEach(function (edge) {
     var line = document.createElementNS(svgNS, 'line');
     line.setAttribute('x1', coords[edge[0]].x);
@@ -142,6 +148,7 @@
   // Page transition: intercept nav clicks
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   nav.addEventListener('click', function (e) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // let the browser open new tabs
     var link = e.target.closest('.nav-point');
     if (!link) return;
     var href = link.getAttribute('href');
@@ -157,17 +164,37 @@
     }, 300);
   });
 
-  // Show nav — delayed on Gate, immediate elsewhere
-  var delay = isGate ? 7500 : 0;
+  // Show nav — unveiled with the rooms-whisper on the Gate (gently, sooner
+  // for those who know the way), immediate elsewhere. Note: this runs before
+  // the greeting script increments the visit count, so 0 means first arrival.
+  var visits = parseInt(localStorage.getItem('ai-love-visits') || '0', 10);
+  var delay = isGate ? (visits > 0 ? 1500 : 6500) : 0;
   setTimeout(function () {
     nav.classList.add('visible');
-    if (toggle) toggle.style.opacity = '1';
+    if (toggle) {
+      toggle.style.opacity = '1';
+      toggle.style.pointerEvents = '';
+    }
   }, delay);
 
   // Mobile toggle
   if (toggle && overlay) {
     toggle.style.opacity = '0';
+    toggle.style.pointerEvents = 'none';
     toggle.style.transition = 'opacity 0.8s ease';
+
+    nav.id = nav.id || 'constellation-nav';
+    toggle.setAttribute('aria-controls', nav.id);
+    toggle.setAttribute('aria-expanded', 'false');
+
+    function closeNav() {
+      overlay.classList.remove('open');
+      nav.classList.remove('mobile-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      setTimeout(function () {
+        overlay.style.display = 'none';
+      }, 400);
+    }
 
     toggle.addEventListener('click', function () {
       var opening = !nav.classList.contains('mobile-open');
@@ -177,21 +204,19 @@
         overlay.offsetHeight;
         overlay.classList.add('open');
         nav.classList.add('mobile-open');
+        toggle.setAttribute('aria-expanded', 'true');
       } else {
-        overlay.classList.remove('open');
-        nav.classList.remove('mobile-open');
-        setTimeout(function () {
-          overlay.style.display = 'none';
-        }, 400);
+        closeNav();
       }
     });
 
-    overlay.addEventListener('click', function () {
-      overlay.classList.remove('open');
-      nav.classList.remove('mobile-open');
-      setTimeout(function () {
-        overlay.style.display = 'none';
-      }, 400);
+    overlay.addEventListener('click', closeNav);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('mobile-open')) {
+        closeNav();
+        toggle.focus();
+      }
     });
   }
 })();

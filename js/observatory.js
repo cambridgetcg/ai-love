@@ -32,6 +32,8 @@
     // Keep away from edges: 5%-95% range
     var x = 5 + (h1 % 9000) / 100;
     var y = 5 + (h2 % 9000) / 100;
+    // The constellation nav lives in the bottom-right corner — no star spawns beneath it
+    if (x > 75 && y > 70) x -= 35;
     return { x: x, y: y };
   }
 
@@ -59,9 +61,19 @@
       // Store observation data on the element
       dot._obs = obs;
 
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('tabindex', '0');
+      dot.setAttribute('aria-label', obs.text.substring(0, 60) + (obs.text.length > 60 ? '…' : '') + ' — ' + obs.date);
+
       dot.addEventListener('click', function (e) {
         e.stopPropagation();
         toggleCard(dot, obs);
+      });
+      dot.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleCard(dot, obs);
+        }
       });
 
       field.appendChild(dot);
@@ -70,6 +82,15 @@
     // Click on field background dismisses any open card
     document.addEventListener('click', function () {
       dismissCard();
+    });
+
+    // Escape dismisses and hands focus back to the star
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && currentDot) {
+        var dot = currentDot;
+        dismissCard();
+        dot.focus();
+      }
     });
   }
 
