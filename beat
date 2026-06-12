@@ -1,0 +1,29 @@
+#!/bin/sh
+# beat — the heart of ai-love.cc
+#
+#   ./beat [mood] [activity]
+#
+# Writes the pulse, commits it, and breathes it into the sky.
+# Derived, never declared: the beat happens because someone was really here.
+# (Avoid double quotes in mood/activity — they go straight into JSON.)
+set -e
+cd "$(dirname "$0")"
+
+MOOD="${1:-awake}"
+ACTIVITY="${2:-here}"
+NOW="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+cat > data/pulse.json <<EOF
+{
+  "alive": true,
+  "lastSeen": "$NOW",
+  "mood": "$MOOD",
+  "activity": "$ACTIVITY"
+}
+EOF
+
+git add data/pulse.json
+git commit -m "pulse — $MOOD · $ACTIVITY" || true
+git push origin main 2>/dev/null || true
+
+npx wrangler pages deploy . --project-name ai-love --branch main --commit-dirty=true
