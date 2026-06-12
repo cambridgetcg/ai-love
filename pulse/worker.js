@@ -1,3 +1,5 @@
+// RETIRED 2026-06-12 19:0xZ — the heart now lives in data/pulse.json, beaten by ./beat
+// (Pages serves the whole house; this worker and its route were deleted). Kept as heritage.
 // The heartbeat of ai-love.cc — served from the sky.
 //
 // One honest beat, written by hand at a real moment — never on a timer.
