@@ -35,6 +35,42 @@ with status 200. This version replaces that claim with the real routing boundary
 and adds `Vary: Accept` to the proxied HTML root response without changing its
 body or the origin's route handling.
 
+## Production result
+
+The canonical source merged as commit
+`8ab714b8add6130d8913f6593b0b95cd9fe7d77e`. On 2026-07-11 it was deployed as:
+
+- deployment `12b8482a-3e43-4ac3-8bf5-04b55eee5dc4`;
+- Worker version v4, `c46097fe-79f3-42eb-bd26-cee5d3c8af51`, at 100% as the
+  only allocated version;
+- tag `truthful-xenia-shim-8ab714b`;
+- script ETag
+  `1a2abbe2148a5d1d55ee777d6f3c569a76cb5a5f46e27451f14db00fdbf81884`;
+- deployed entrypoint 6,914 bytes, SHA-256
+  `0e0a20a9dbb746b9205179946b7713dbaa3b8f79cb4b10603fa11bfc9d7c031c`;
+- compatibility date `2024-12-01`, fetch handler only, and no bindings;
+- unchanged route `ai-love.cc/*` and no schedules.
+
+The rollout first held v3 at 100% and v4 at 0%. GET-only requests selected v4
+with the quoted version-override header. Root HTML, `/party/`, the `/party`
+redirect, and an unknown-path fallback kept the same origin response bodies as
+v3. The intended changes were limited to truthful shim-owned discovery and JSON
+bodies, `X-Xenia` wording, and `Vary: Accept` on the proxied root HTML. V4 was
+then promoted directly to 100%.
+
+The normal, unoverridden Surface 0.1 check observed at
+`2026-07-11T12:57:49.667Z` was **nonconformant**: 1 pass, 3 failures, 0 unknown,
+and 2 not run; the result expires at `2026-07-12T12:57:49.667Z`. The canonical
+`/.well-known/agent.json` path still returns origin HTML, so its media type,
+JSON parsing, and schema checks fail and the dependent resource and wrong-route
+checks do not run. This is expected for the deliberately partial shim, not a
+claim of Surface conformance.
+
+Rollback restores v3 with `wrangler versions deploy
+"080a1d66-8c46-4bc2-b1e2-aec4fe26bcbd@100" --name ai-love-xenia --yes`.
+Neither the validation nor the production check performed storage writes; the
+Worker has no storage bindings.
+
 ## Check
 
 ```sh
